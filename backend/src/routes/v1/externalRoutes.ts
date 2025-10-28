@@ -1,4 +1,11 @@
 import { Router } from 'express';
+import {
+  createHandler,
+  getQuestionHandler,
+  submitAnswerHandler,
+  requestHintHandler,
+  getResultHandler,
+} from '@/api/v1/external/quiz/controller';
 
 const router = Router();
 
@@ -8,15 +15,16 @@ const router = Router();
  *
  * @description
  * Public endpoints that don't require authentication
- * Feature-specific routes will be added here
  */
 
 /**
- * @note
- * Feature routes will be mounted here
- * Example:
- * import quizRoutes from '@/api/v1/external/quiz/routes';
- * router.use('/quiz', quizRoutes);
+ * @route Quiz endpoints
+ * @description Quiz session management and gameplay
  */
+router.post('/quiz', createHandler);
+router.get('/quiz/:id_sessao/question', getQuestionHandler);
+router.post('/quiz/:id_sessao/answer', submitAnswerHandler);
+router.post('/quiz/:id_sessao/hint', requestHintHandler);
+router.get('/quiz/:id_sessao/result', getResultHandler);
 
 export default router;
